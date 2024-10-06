@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class MovingObjects : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private float xBound;
+    [SerializeField] private float speed = 0.5f;
 
     private void Update()
     {
-        this.transform.position -= Vector3.right * speed * Time.deltaTime;
-
-        if (this.transform.position.x < xBound)
-        {
-            Destroy(this.gameObject);
-        }
+        transform.position += Vector3.left * speed * Time.deltaTime;
     }
 }

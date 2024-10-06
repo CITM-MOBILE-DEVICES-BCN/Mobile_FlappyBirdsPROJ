@@ -5,8 +5,8 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject prefab;
-    [SerializeField] private float time;
-    [SerializeField] private float yClamp;
+    [SerializeField] private float time = 1f;
+    [SerializeField] private float yClamp = 0.5f;
 
     private float elapsedTime;
 
@@ -24,10 +24,10 @@ public class Spawner : MonoBehaviour
 
     private void SpawnObject()
     {
-        float offsetY = UnityEngine.Random.Range(-yClamp, yClamp);
+        float offsetY = Random.Range(-yClamp, yClamp);
+        Vector2 position = new Vector2(this.transform.position.x, this.transform.position.y + offsetY);
+        GameObject obj = Instantiate(prefab, position, Quaternion.identity, this.transform);
 
-        Vector2 pos = new Vector2(this.transform.position.x, this.transform.position.y + offsetY);
-
-        Instantiate(prefab, pos, Quaternion.identity, this.transform);
+        Destroy(obj, 10);
     }
 }
