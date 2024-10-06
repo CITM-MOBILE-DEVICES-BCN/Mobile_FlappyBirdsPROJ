@@ -12,7 +12,12 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        elapsedTime += Time.deltaTime;
+        if (GameManager.instance.state != GameManager.GameState.Playing)
+        {
+            return;
+        }
+
+            elapsedTime += Time.deltaTime;
 
         if (elapsedTime > time)
         {

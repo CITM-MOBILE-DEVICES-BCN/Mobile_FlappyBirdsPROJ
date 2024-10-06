@@ -344,9 +344,9 @@ TextureImporter:
       name: Mobile - Flappy Bird - Version 12 Sprites (1)_11
       rect:
         serializedVersion: 2
-        x: 329
+        x: 295
         y: 428
-        width: 58
+        width: 92
         height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

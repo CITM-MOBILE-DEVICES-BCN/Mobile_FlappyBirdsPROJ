@@ -29,6 +29,18 @@ public class Bird : MonoBehaviour
         controls.Disable();
     }
 
+    private void Update()
+    {
+        if(GameManager.instance.state == GameManager.GameState.Waiting)
+        {
+            rb.Sleep();
+        }
+        else
+        {
+            rb.WakeUp();
+        }
+    }
+
     private void FixedUpdate()
     {
         transform.rotation = Quaternion.Euler(0,0, rb.velocity.y * rotationSpeed);
@@ -46,6 +58,7 @@ public class Bird : MonoBehaviour
 
     private void Flap()
     {
+        GameManager.instance.state = GameManager.GameState.Playing;
         if (rb.position.y < yBound)
         {
             rb.velocity = Vector2.up * force;
