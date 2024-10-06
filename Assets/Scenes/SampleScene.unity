@@ -243,9 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76340ff3adc089d428597f64fecd1520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 6733376489921736258, guid: 8cac3e9396b28f94787a6af741292ed0, type: 3}
-  _time: 2
-  _yClamp: 1.5
+  prefab: {fileID: 6733376489921736258, guid: 8cac3e9396b28f94787a6af741292ed0, type: 3}
+  time: 0
+  yClamp: 0
 --- !u!4 &612399546
 Transform:
   m_ObjectHideFlags: 0
@@ -544,9 +544,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3006dfddcbb06dc4aa2a20740ca209c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 1853807439}
-  _force: 25
-  _yBound: 4
+  rb: {fileID: 1853807439}
+  force: 6
+  rotationSpeed: 11
+  maxRotation: 20
+  minRotation: 260
+  yBound: 5
 --- !u!70 &1853807438
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -597,7 +600,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
