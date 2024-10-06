@@ -1,0 +1,45 @@
+{
+    "name": "Input Controller",
+    "maps": [
+        {
+            "name": "Bird",
+            "id": "4ee79105-ea50-4165-ab7e-fdebbc545df0",
+            "actions": [
+                {
+                    "name": "touch",
+                    "type": "Button",
+                    "id": "10f626ce-a552-49e3-bdab-c4548c10ec8c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "137dadc3-1b3b-44b7-8bbc-4e61997cb058",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc683bb0-bd4e-4407-8809-32d9949e8862",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _prefab;
-    [SerializeField] private float _time;
-    [SerializeField] private float _yClamp;
+    [SerializeField] private GameObject prefab;
+    [SerializeField] private float time;
+    [SerializeField] private float yClamp;
 
-    private float _elapsedTime;
+    private float elapsedTime;
 
     private void Update()
     {
-        _elapsedTime += Time.deltaTime;
+        elapsedTime += Time.deltaTime;
 
-        if (_elapsedTime > _time)
+        if (elapsedTime > time)
         {
             SpawnObject();
 
-            _elapsedTime = 0f;
+            elapsedTime = 0f;
         }
     }
 
     private void SpawnObject()
     {
-        float offsetY = UnityEngine.Random.Range(-_yClamp, _yClamp);
+        float offsetY = UnityEngine.Random.Range(-yClamp, yClamp);
 
         Vector2 pos = new Vector2(this.transform.position.x, this.transform.position.y + offsetY);
 
-        Instantiate(_prefab, pos, Quaternion.identity, this.transform);
+        Instantiate(prefab, pos, Quaternion.identity, this.transform);
     }
 }
