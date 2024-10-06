@@ -58,6 +58,11 @@ public class Bird : MonoBehaviour
 
     private void Flap()
     {
+        if(GameManager.instance.state == GameManager.GameState.Over)
+        {
+            return;
+        }
+
         GameManager.instance.state = GameManager.GameState.Playing;
         if (rb.position.y < yBound)
         {
