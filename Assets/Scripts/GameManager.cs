@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] private GameObject gameOverCanvas;
+    [SerializeField] private AudioSource gameOverFX;
 
     void Awake()
     {
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         gameOverCanvas.SetActive(true);
+        gameOverFX.Play();
         Time.timeScale = 0.0f;
     }
 

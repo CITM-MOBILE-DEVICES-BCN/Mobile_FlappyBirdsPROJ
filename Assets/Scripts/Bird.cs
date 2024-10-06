@@ -10,6 +10,8 @@ public class Bird : MonoBehaviour
     [SerializeField] private float maxRotation = 20f;
     [SerializeField] private float minRotation = 290f;
     [SerializeField] private float yBound;
+    [SerializeField] private AudioSource flapFX;
+    [SerializeField] private AudioSource hitFX;
     private InputController controls;
     void Awake()
     {
@@ -25,10 +27,6 @@ public class Bird : MonoBehaviour
     private void OnDisable()
     {
         controls.Disable();
-    }
-
-    private void Update()
-    {
     }
 
     private void FixedUpdate()
@@ -51,11 +49,18 @@ public class Bird : MonoBehaviour
         if (rb.position.y < yBound)
         {
             rb.velocity = Vector2.up * force;
+            flapFX.Play();
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        hitFX.Play();
         GameManager.instance.GameOver();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Score.instance.UpdateScore();
     }
 }
