@@ -53,4 +53,9 @@ public class Bird : MonoBehaviour
             rb.velocity = Vector2.up * force;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameManager.instance.GameOver();
+    }
 }
