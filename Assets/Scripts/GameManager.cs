@@ -18,12 +18,26 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverCanvas;
     [SerializeField] private AudioSource gameOverFX;
 
+    private InputController controls;
+
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            controls = new InputController();
         }
+    }
+
+    private void OnEnable()
+    {
+        controls.Game.Exit.started += ctx => Quit();
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
     }
 
     public void GameOver()
@@ -39,5 +53,13 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1.0f;
         state = GameState.Waiting;
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 }

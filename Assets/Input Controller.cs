@@ -61,6 +61,45 @@ public partial class @InputController: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Game"",
+            ""id"": ""cd473607-dbf2-4070-8c8b-8d32f1422c14"",
+            ""actions"": [
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""b0081806-8d75-4121-a21c-c77ba0da909f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1444a590-88d1-4ba7-a5b4-a203c15c08ad"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""40d96881-1065-483f-a9f2-6fa5ef5ad5b1"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -68,6 +107,9 @@ public partial class @InputController: IInputActionCollection2, IDisposable
         // Bird
         m_Bird = asset.FindActionMap("Bird", throwIfNotFound: true);
         m_Bird_touch = m_Bird.FindAction("touch", throwIfNotFound: true);
+        // Game
+        m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
+        m_Game_Exit = m_Game.FindAction("Exit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -171,8 +213,58 @@ public partial class @InputController: IInputActionCollection2, IDisposable
         }
     }
     public BirdActions @Bird => new BirdActions(this);
+
+    // Game
+    private readonly InputActionMap m_Game;
+    private List<IGameActions> m_GameActionsCallbackInterfaces = new List<IGameActions>();
+    private readonly InputAction m_Game_Exit;
+    public struct GameActions
+    {
+        private @InputController m_Wrapper;
+        public GameActions(@InputController wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Exit => m_Wrapper.m_Game_Exit;
+        public InputActionMap Get() { return m_Wrapper.m_Game; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GameActions set) { return set.Get(); }
+        public void AddCallbacks(IGameActions instance)
+        {
+            if (instance == null || m_Wrapper.m_GameActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GameActionsCallbackInterfaces.Add(instance);
+            @Exit.started += instance.OnExit;
+            @Exit.performed += instance.OnExit;
+            @Exit.canceled += instance.OnExit;
+        }
+
+        private void UnregisterCallbacks(IGameActions instance)
+        {
+            @Exit.started -= instance.OnExit;
+            @Exit.performed -= instance.OnExit;
+            @Exit.canceled -= instance.OnExit;
+        }
+
+        public void RemoveCallbacks(IGameActions instance)
+        {
+            if (m_Wrapper.m_GameActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGameActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GameActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GameActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GameActions @Game => new GameActions(this);
     public interface IBirdActions
     {
         void OnTouch(InputAction.CallbackContext context);
+    }
+    public interface IGameActions
+    {
+        void OnExit(InputAction.CallbackContext context);
     }
 }
