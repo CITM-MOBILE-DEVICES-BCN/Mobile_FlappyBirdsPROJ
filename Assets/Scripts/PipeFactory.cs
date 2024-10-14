@@ -1,21 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PipeFactory
 {
-    public IPipe CreatePipe(string pipeType)
+    private GameObject[] pipePrefabs;
+
+    public PipeFactory(GameObject[] prefabs)
     {
+        this.pipePrefabs = prefabs;
+    }
+
+    public GameObject CreatePipe(string pipeType, Vector2 position)
+    {
+        GameObject pipeObject;
+
         switch (pipeType)
         {
             case "Basic":
-                return new NormalPipe();
+                pipeObject = Object.Instantiate(pipePrefabs[0], position, Quaternion.identity);
+                break;
             case "Mobile":
-                return new MovingPipe();
+                pipeObject = Object.Instantiate(pipePrefabs[1], position, Quaternion.identity);
+                break;
             case "DoubleOpening":
-                return new DoublePipe();
+                pipeObject = Object.Instantiate(pipePrefabs[2], position, Quaternion.identity);
+                break;
             default:
-                throw new System.Exception("Invalid Pipe Type");
+                Debug.LogError("Invalid pipe name");
+                return null;
         }
+
+        return pipeObject;
     }
 }

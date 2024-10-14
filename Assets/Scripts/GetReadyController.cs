@@ -27,7 +27,7 @@ public class GetReadyController : MonoBehaviour
         while (canvasGroup.alpha != 0)
         {
             canvasGroup.alpha = Mathf.SmoothStep(1, 0, (Time.time - time) / duration);
-            Debug.Log((time - Time.time) / duration);
+            //Debug.Log((time - Time.time) / duration); 
             yield return null;
         }
     }

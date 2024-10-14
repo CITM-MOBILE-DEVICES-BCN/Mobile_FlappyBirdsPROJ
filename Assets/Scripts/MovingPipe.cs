@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPipe : IPipe
+public class MovingPipe : MonoBehaviour
 {
-    public void Spawn(Vector3 position)
+    [SerializeField] private float amplitude = 2.0f;
+    [SerializeField] private float speed = 2.0f;
+    private Vector2 initialPosition;
+
+    void Start()
     {
-        throw new System.NotImplementedException();
+        initialPosition = transform.position;
     }
 
-    public void UpdatePipe()
+    void Update()
     {
-        throw new System.NotImplementedException();
+        float newY = initialPosition.y + Mathf.Sin(Time.time * speed) * amplitude;
+        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
 }

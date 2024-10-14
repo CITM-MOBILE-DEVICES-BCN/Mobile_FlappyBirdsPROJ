@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         controls.Game.Exit.started += ctx => Quit();
+        controls.Game.Restart.started += ctx => RestartGame();
         controls.Enable();
     }
 
@@ -50,6 +51,11 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        if (state != GameState.Over)
+        {
+            return;
+        }
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1.0f;
         state = GameState.Waiting;

@@ -271,6 +271,7 @@ GameObject:
   - component: {fileID: 4021105392011668104}
   - component: {fileID: -7978050405094499280}
   - component: {fileID: 6395079676153002365}
+  - component: {fileID: 5799408009582119613}
   m_Layer: 0
   m_Name: MovingPipe
   m_TagString: Untagged
@@ -353,3 +354,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.24, y: 2.42}
   m_EdgeRadius: 0
+--- !u!114 &5799408009582119613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6733376489921736258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6ea6bbaafe063747bb1edf2bf86c91c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 1.88
+  speed: 0.9
