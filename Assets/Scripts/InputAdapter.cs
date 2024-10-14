@@ -32,7 +32,10 @@ public class InputAdapter : MonoBehaviour
 
     private void GameRestart()
     {
-        GameManager.instance.state = GameManager.GameState.Restart;
+        if (GameManager.instance.state == GameManager.GameState.Over)
+        {
+            GameManager.instance.state = GameManager.GameState.Restart;
+        }
     }
 
     private void PlayerFlap()

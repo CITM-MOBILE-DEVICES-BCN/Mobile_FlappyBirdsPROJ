@@ -59,7 +59,8 @@ public class Bird : MonoBehaviour
 
     private void Flap()
     {
-        if(GameManager.instance.state == GameManager.GameState.Over)
+        if (GameManager.instance.state == GameManager.GameState.Over
+         || GameManager.instance.state == GameManager.GameState.Death)
         {
             return;
         }
@@ -77,7 +78,7 @@ public class Bird : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         hitFX.Play();
-        GameManager.instance.state = GameManager.GameState.Over;
+        GameManager.instance.state = GameManager.GameState.Death;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

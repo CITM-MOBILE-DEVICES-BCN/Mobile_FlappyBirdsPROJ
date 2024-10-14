@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     {
         Waiting,
         Playing,
+        Death,
         Over,
         Restart,
         Quit
@@ -36,8 +37,10 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Playing:
                 break;
-            case GameState.Over:
+            case GameState.Death:
                 GameOver();
+                break;
+            case GameState.Over:
                 break;
             case GameState.Restart:
                 RestartGame();
@@ -55,7 +58,7 @@ public class GameManager : MonoBehaviour
         gameOverCanvas.SetActive(true);
         gameOverFX.Play();
         Time.timeScale = 0.0f;
-        state = GameState.Waiting;
+        state = GameState.Over;
     }
 
     private void RestartGame()
