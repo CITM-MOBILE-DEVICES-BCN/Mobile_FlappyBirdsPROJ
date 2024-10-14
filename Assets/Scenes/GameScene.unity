@@ -1193,7 +1193,7 @@ MonoBehaviour:
   - Mobile
   - DoubleOpening
   time: 1.5
-  yClamp: 2.5
+  yClamp: 2.2
 --- !u!4 &612399546
 Transform:
   m_ObjectHideFlags: 0
