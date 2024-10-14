@@ -581,6 +581,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 458208864}
   m_CullTransparentMesh: 1
+--- !u!1 &505117702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 505117704}
+  - component: {fileID: 505117703}
+  m_Layer: 0
+  m_Name: InputAdapter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &505117703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505117702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3345dc5969f9bf84db54ef9ed0cd1823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRef: {fileID: 1853807437}
+--- !u!4 &505117704
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505117702}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 551, y: 310, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,7 +1184,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76340ff3adc089d428597f64fecd1520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6733376489921736258, guid: 8cac3e9396b28f94787a6af741292ed0, type: 3}
+  pipePrefabs:
+  - {fileID: 6733376489921736258, guid: 8cac3e9396b28f94787a6af741292ed0, type: 3}
+  - {fileID: 6733376489921736258, guid: d05381f2c80f3a24aad93c68e3ba47a3, type: 3}
+  - {fileID: 6733376489921736258, guid: 5382b2002ea1d2a49a0563c3d7245da8, type: 3}
+  pipeTypes:
+  - Basic
+  - Mobile
+  - DoubleOpening
   time: 1.5
   yClamp: 2.5
 --- !u!4 &612399546
@@ -2654,6 +2706,7 @@ MonoBehaviour:
   yBound: 5
   flapFX: {fileID: 1659474971}
   hitFX: {fileID: 359449374}
+  state: 0
 --- !u!70 &1853807438
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2859,3 +2912,4 @@ SceneRoots:
   - {fileID: 612399546}
   - {fileID: 1786052734}
   - {fileID: 1077390357}
+  - {fileID: 505117704}

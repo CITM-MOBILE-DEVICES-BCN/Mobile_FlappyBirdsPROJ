@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Bird : MonoBehaviour
 {
+    public enum State
+    {
+        Idle,
+        Flap
+    }
+
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float force = 1.5f;
     [SerializeField] private float rotationSpeed = 10f;
@@ -12,22 +18,8 @@ public class Bird : MonoBehaviour
     [SerializeField] private float yBound;
     [SerializeField] private AudioSource flapFX;
     [SerializeField] private AudioSource hitFX;
-    private InputController controls;
-    void Awake()
-    {
-        controls = new InputController();
-    }
 
-    private void OnEnable()
-    {
-        controls.Bird.touch.started += ctx => Flap();
-        controls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Disable();
-    }
+    public State state;
 
     private void Update()
     {
@@ -38,6 +30,15 @@ public class Bird : MonoBehaviour
         else
         {
             rb.WakeUp();
+        }
+
+        switch (state)
+        {
+            case State.Idle:
+                break;
+            case State.Flap:
+                Flap();
+                break;
         }
     }
 
@@ -69,12 +70,14 @@ public class Bird : MonoBehaviour
             rb.velocity = Vector2.up * force;
             flapFX.Play();
         }
+
+        state = State.Idle;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         hitFX.Play();
-        GameManager.instance.GameOver();
+        GameManager.instance.state = GameManager.GameState.Over;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

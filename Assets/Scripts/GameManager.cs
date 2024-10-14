@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
     {
         Waiting,
         Playing,
-        Over
+        Over,
+        Restart,
+        Quit
     }
 
     public static GameManager instance;
@@ -18,50 +20,52 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverCanvas;
     [SerializeField] private AudioSource gameOverFX;
 
-    private InputController controls;
-
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            controls = new InputController();
         }
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        controls.Game.Exit.started += ctx => Quit();
-        controls.Game.Restart.started += ctx => RestartGame();
-        controls.Enable();
+        switch (state)
+        {
+            case GameState.Waiting:
+                break;
+            case GameState.Playing:
+                break;
+            case GameState.Over:
+                GameOver();
+                break;
+            case GameState.Restart:
+                RestartGame();
+                break;
+            case GameState.Quit:
+                Quit();
+                break;
+            default:
+                break;
+        }
     }
 
-    private void OnDisable()
-    {
-        controls.Disable();
-    }
-
-    public void GameOver()
+    private void GameOver()
     {
         gameOverCanvas.SetActive(true);
         gameOverFX.Play();
         Time.timeScale = 0.0f;
-        state = GameState.Over;
+        state = GameState.Waiting;
     }
 
-    public void RestartGame()
+    private void RestartGame()
     {
-        if (state != GameState.Over)
-        {
-            return;
-        }
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1.0f;
         state = GameState.Waiting;
     }
 
-    public void Quit()
+    private void Quit()
     {
         Application.Quit();
 #if UNITY_EDITOR
